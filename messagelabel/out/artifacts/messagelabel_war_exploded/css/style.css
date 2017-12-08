@@ -1,0 +1,123 @@
+body{
+    height: 0px;
+}
+.content {
+    position: relative;
+    background: #464646 url(/message/img/59H-from-gratisography.png) no-repeat center center fixed;
+    background-size: cover;
+}
+
+.main-section {
+    position: relative;
+}
+
+form {
+    background-color:  #e9ffff;
+    width: 100%;
+}
+
+.res_header {
+    display: block;
+    font-size: 24px;
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+    color: #384e56;
+}
+
+.res {
+    display: inline-block;
+    margin-bottom: 5px;
+    /*margin-right: 35px;*/
+    margin-left: 40px;
+}
+
+.res_header_title {
+    display: block;
+    width: 300px;
+    font-size: larger;
+    color: #464646;
+}
+
+.res_body {
+    display: inline-block;
+    width: 300px;
+}
+
+#menuToggler {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+}
+.message{
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+.text{
+    /*width: 50%;*/
+    font-size: 20px;
+    font-weight: 800;
+    color: #d9dee2;
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+.buttona, .buttona:visited {
+    display: inline-block;
+    max-width: 200px;
+    margin: 30px 30px 30px 30px;
+    padding: 10px;
+    font-family: "Signika", sans-serif;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    border-radius: 3px;
+    text-transform: capitalize;
+    text-align: center;
+    transition: all 0.1s ease;
+    text-decoration: none;
+    cursor: pointer;
+}
+.buttona:hover {
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: white;
+}
+.buttona:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.rksx,.gmqx,.grgz{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /*align-content: flex-start;*/
+}
+ul.page {
+    display: inline-block;
+    padding: 0;
+    margin: 20px;
+}
+
+ul.page li {display: inline;}
+
+ul.page li a {
+    color: #fff;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+ul.page li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+ul.page li a:hover:not(.active) {
+    background-color: #ddd;
+}
