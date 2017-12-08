@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="messagelabel:war">
+    <output-path>$PROJECT_DIR$/out/artifacts/messagelabel_war</output-path>
+    <root id="archive" name="messagelabel_war.war">
+      <element id="artifact" artifact-name="messagelabel:war exploded" />
+    </root>
+  </artifact>
+</component>
