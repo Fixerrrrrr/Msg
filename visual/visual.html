@@ -33,8 +33,9 @@
         <div id="map"></div>
         <div id="bar"></div>
     </div>
-    <div class="section" id="pie"></div>
+    <div class="section" id="tree"></div>
     <div class="section" id="list"></div>
+    <div class="section" id="pie"></div>
 </div>
 <script>
 
@@ -43,6 +44,7 @@
     var bar = document.getElementById("bar");
     var pie = document.getElementById("pie");
     var list = document.getElementById("list");
+    var tree = document.getElementById("tree");
 
     option_map = null;
     option_bar = null;
@@ -79,6 +81,10 @@
         var myChart4 = echarts.init(list);
         if (option_list && typeof option_list === "object") {
             myChart4.setOption(option_list, true);
+        }
+        var myChart5 = echarts.init(tree);
+        if (option_tree && typeof option_tree === "object") {
+            myChart5.setOption(option_tree, true);
         }
     }
     function get_json() {
@@ -146,72 +152,73 @@
             myChart.setOption(option_bar, true);
         }
     }
-    option_map = {
-        backgroundColor: '#404a59',
-        title: {
-            text: '短信地理分布',
-            top: '2%',
-            left: '66%',
-            textStyle: {
-                color: '#fff',
-                fontSize: '24'
-            }
-        },
-        tooltip: {
-            trigger: 'item',
-            formatter: function (params) {
-                return params.name + ' : ' + params.value[2];
-            }
-        },
-        visualMap: {
-            calculable: true,
-            color: ['#d94e5d', '#eac736', '#50a3ba'],
-            textStyle: {
-                color: '#fff'
-            }
-        },
-        geo: {
-            map: 'china',
-//            roam: true,
-            label: {
-                emphasis: {
-                    show: false
+
+        option_map = {
+            backgroundColor: '#404a59',
+            title: {
+                text: '短信地理分布',
+                top: '2%',
+                left: '66%',
+                textStyle: {
+                    color: '#fff',
+                    fontSize: '24'
                 }
             },
-            itemStyle: {
-                normal: {
-                    areaColor: '#323c48',
-                    borderColor: '#111'
-                },
-                emphasis: {
-                    areaColor: '#2a333d'
+            tooltip: {
+                trigger: 'item',
+                formatter: function (params) {
+                    return params.name + ' : ' + params.value[2];
                 }
-            }
-        },
-        series: [
-            {
-                type: 'scatter',
-                mapType: 'china',
-                coordinateSystem: 'geo',
-                data: res,
-                symbolSize: 12,
+            },
+            visualMap: {
+                calculable: true,
+                color: ['#d94e5d', '#eac736', '#50a3ba'],
+                textStyle: {
+                    color: '#fff'
+                }
+            },
+            geo: {
+                map: 'china',
+    //            roam: true,
                 label: {
-                    normal: {
-                        show: false
-                    },
                     emphasis: {
                         show: false
                     }
                 },
                 itemStyle: {
+                    normal: {
+                        areaColor: '#323c48',
+                        borderColor: '#111'
+                    },
                     emphasis: {
-                        borderColor: '#fff',
-                        borderWidth: 1
+                        areaColor: '#2a333d'
                     }
                 }
-            }
-        ]
-    };
+            },
+            series: [
+                {
+                    type: 'scatter',
+                    mapType: 'china',
+                    coordinateSystem: 'geo',
+                    data: res,
+                    symbolSize: 12,
+                    label: {
+                        normal: {
+                            show: false
+                        },
+                        emphasis: {
+                            show: false
+                        }
+                    },
+                    itemStyle: {
+                        emphasis: {
+                            borderColor: '#fff',
+                            borderWidth: 1
+                        }
+                    }
+                }
+            ]
+        };
     option_bar = {
         backgroundColor: '#404a59',
         tooltip: {
@@ -239,7 +246,7 @@
         yAxis: {
             type: 'category',
             data: dic_proyy,
-            axisLabel:{
+            axisLabel: {
                 fontSize: '16'
             },
             axisLine: {
@@ -380,8 +387,8 @@
         yAxis: [
             {
                 type: 'value',
-                splitLine:{
-                    show:false
+                splitLine: {
+                    show: false
                 },
                 axisLabel: {
                     show: false,
@@ -402,8 +409,8 @@
 //                        position: 'insideRight'
 //                    }
 //                },
-                itemStyle:{
-                    normal:{
+                itemStyle: {
+                    normal: {
                         //颜色渐变函数 前四个参数分别表示四个位置依次为左、下、右、上
                         color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
                             offset: 0,
@@ -420,13 +427,65 @@
                                 fontSize: 25
                             },
                             formatter: function (params) {
-                                var resu = params.value * 100 / 2738+' ';
-                                return resu.substr(0,3)+'%';
+                                var resu = params.value * 100 / 2738 + ' ';
+                                return resu.substr(0, 3) + '%';
                             }
                         }
                     }
                 },
                 data: [228, 197, 173, 152, 150]
+            }
+        ]
+    };
+
+    option_tree = {
+        backgroundColor: '#404a59',
+        tooltip: {
+            trigger: 'item',
+            triggerOn: 'mousemove'
+        },
+        series:[
+            {
+                type: 'tree',
+
+                data: [ {'name':'标签','children':[{'name':'人口属性','children':[{'name':'性别','children':[{'name':'男'},{'name':'女'}]},{'name':'年龄','children':[{'name':'18岁以下'},{'name':'19-24岁'},{'name':'25-34岁'},{'name':'35-49岁'},{'name':'50岁以上'}]},{'name':'月收入','children':[{'name':'2000以下'},{'name':'2001-4000元'},{'name':'4001-6000元'},{'name':'6001-8000元'},{'name':'8001-10000元'},{'name':'10000元以上'}]},{'name':'婚姻状态','children':[{'name':'未婚'},{'name':'已婚'},{'name':'离异'}]},{'name':'身份职业','children':[{'name':'学生'},{'name':'职员'},{'name':'企业管理者、企业主'}]},{'name':'受教育程度','children':[{'name':'高中（中专）及以下'},{'name':'大专及本科'},{'name':'硕士'},{'name':'博士'}]},{'name':'关键人生阶段','children':[{'name':'学生时期'},{'name':'求职时期'},{'name':'适婚时期'},{'name':'孕产时期'},{'name':'育儿时期'},{'name':'事业成熟期'},{'name':'老年黄金期'}]},{'name':'所在行业','children':[{'name':'广告|媒体|文体娱乐'},{'name':'机械制造'},{'name':'计算机|互联网|通信电子'},{'name':'建筑'},{'name':'教育'},{'name':'金融|银行|保险|房地产'},{'name':'旅游'},{'name':'贸易|零售'},{'name':'制药医疗|保健'},{'name':'住宿|餐饮|服务业'}]}]},{'name':'购买倾向','children':[{'name':'服饰箱包','children':[{'name':'服装'},{'name':'鞋靴'},{'name':'配饰'},{'name':'箱包'},{'name':'其他'}]},{'name':'母婴','children':[{'name':'童装玩具'},{'name':'孕产用品'},{'name':'奶食'},{'name':'其他'}]},{'name':'电子产品','children':[{'name':'家电'},{'name':'数码'},{'name':'手机'},{'name':'其他'}]},{'name':'美妆|个人护理','children':[{'name':'美妆'},{'name':'洗护'},{'name':'保健品'},{'name':'医疗药品'},{'name':'其他'}]},{'name':'文体活动','children':[{'name':'图书'},{'name':'教育培训'},{'name':'乐器'},{'name':'健身运动'},{'name':'其他'}]},{'name':'娱乐活动','children':[{'name':'游戏'},{'name':'影视周边'},{'name':'票券'},{'name':'旅游出行'},{'name':'其他'}]},{'name':'食品','children':[{'name':'美食'},{'name':'生鲜'},{'name':'零食'},{'name':'其他'}]},{'name':'家养','children':[{'name':'鲜花园艺'},{'name':'宠物水族'},{'name':'农资'},{'name':'其他'}]},{'name':'住宅汽车','children':[{'name':'房产'},{'name':'装修建材'},{'name':'家具家饰家纺'},{'name':'汽车'},{'name':'其他'}]},{'name':'生活服务','children':[{'name':'日用品百货'},{'name':'快递'},{'name':'打车租车代驾'},{'name':'餐饮服务'},{'name':'酒店服务'},{'name':'手机业务'},{'name':'其他'}]},{'name':'财经金融','children':[{'name':'投资理财'},{'name':'借贷'},{'name':'存款'},{'name':'彩票'},{'name':'其他'}]}]},{'name':'个人关注','children':[{'name':'娱乐','children':[{'name':'游戏'},{'name':'文学'},{'name':'动漫'},{'name':'视频'},{'name':'音乐舞蹈'},{'name':'其他'}]},{'name':'生活信息','children':[{'name':'地图'},{'name':'购物'},{'name':'天气'},{'name':'违章查询'},{'name':'其他'}]},{'name':'商务信息','children':[{'name':'商务信息'}]},{'name':'招聘信息','children':[{'name':'社会招聘'},{'name':'兼职'},{'name':'校园招聘'},{'name':'其他'}]}]}]}
+                ],
+
+                left: '2%',
+                right: '2%',
+                top: '8%',
+                bottom: '20%',
+
+                symbol: 'emptyCircle',
+
+                orient: 'vertical',
+
+                expandAndCollapse: true,
+
+                label: {
+                    normal: {
+                        position: 'top',
+                        rotate: -90,
+                        verticalAlign: 'middle',
+                        align: 'right',
+                        fontSize: 16,
+                        color: '#fff',
+                        fontWeight: '400'
+                    }
+                },
+
+                leaves: {
+                    label: {
+                        normal: {
+                            position: 'bottom',
+                            rotate: -90,
+                            verticalAlign: 'middle',
+                            align: 'left'
+                        }
+                    }
+                },
+
+                animationDurationUpdate: 750
             }
         ]
     };
